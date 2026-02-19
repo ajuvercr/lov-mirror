@@ -1,0 +1,8 @@
+{
+  "name": "lov-mirror",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "n3": "^1.21.0"
+  }
+}
