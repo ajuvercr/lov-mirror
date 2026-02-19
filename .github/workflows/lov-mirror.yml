@@ -1,0 +1,62 @@
+name: Build & Deploy LOV mirror
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+  schedule:
+    # Nightly at 03:17 UTC
+    - cron: "17 3 * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "latest"
+
+      # Optional: cache Bun install
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build LOV mirror
+        env:
+          # Where your script writes output
+          OUT_DIR: public/lov
+          # Adjust to taste
+          CONCURRENCY: "10"
+        run: bun scripts/fetch-lov.ts
+
+      # If your GitHub Pages source is "GitHub Actions", this is the recommended deployment flow
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
