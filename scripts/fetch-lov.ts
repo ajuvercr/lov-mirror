@@ -536,7 +536,7 @@ async function main() {
   const rows = document.getElementById("rows");
   const q = document.getElementById("q");
 
-  function enc(x){ return encodeURIComponent(x); }
+  function enc(x){ return encodeURIComponent(encodeURIComponent(x)); }
 
   function render(filter){
     rows.innerHTML = "";
