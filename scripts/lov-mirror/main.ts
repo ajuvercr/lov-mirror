@@ -161,6 +161,12 @@ async function processOne(v: VocabItem): Promise<ResultItem> {
       const { classes, properties } = findClassesAndProperties(conv.store);
 
       for (const iri of classes) {
+        await writeTinyTermFile({
+          outRoot: OUT_ROOT,
+          kind: "by-iri",
+          termIri: iri,
+          store: conv.store,
+        });
         const href = await writeTinyTermFile({
           outRoot: OUT_ROOT,
           kind: "classes",
@@ -172,6 +178,12 @@ async function processOne(v: VocabItem): Promise<ResultItem> {
         classLinks.push({ iri, href, label, description });
       }
       for (const iri of properties) {
+        await writeTinyTermFile({
+          outRoot: OUT_ROOT,
+          kind: "by-iri",
+          termIri: iri,
+          store: conv.store,
+        });
         const href = await writeTinyTermFile({
           outRoot: OUT_ROOT,
           kind: "properties",

@@ -133,7 +133,7 @@ export type TermInfo = {
 
 export async function writeTinyTermFile(opts: {
   outRoot: string; // OUT_ROOT
-  kind: "classes" | "properties";
+  kind: "classes" | "properties" | "by-iri";
   termIri: string;
   store: Store;
 }): Promise<string | null> {
