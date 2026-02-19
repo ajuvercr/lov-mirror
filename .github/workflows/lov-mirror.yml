@@ -33,13 +33,13 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Restore mirror cache
-        uses: actions/cache@v4
-        with:
-          path: public/lov
-          key: lov-mirror-${{ runner.os }}-${{ github.ref_name }}
-          restore-keys: |
-            lov-mirror-${{ runner.os }}-
+      # - name: Restore mirror cache
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: public/lov
+      #     key: lov-mirror-${{ runner.os }}-${{ github.ref_name }}
+      #     restore-keys: |
+      #       lov-mirror-${{ runner.os }}-
 
       - name: Build LOV mirror
         env:
