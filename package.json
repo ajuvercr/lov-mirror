@@ -4,5 +4,9 @@
   "type": "module",
   "dependencies": {
     "n3": "^1.21.0"
+  },
+  "devDependencies": {
+    "@types/n3": "^1.26.1",
+    "@types/node": "^25.3.0"
   }
 }
