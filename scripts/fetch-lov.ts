@@ -554,18 +554,16 @@ async function main() {
         ? "<a href='./" + it.fileByPrefix + "'>${OUT_FILENAME}</a>"
         : "";
 
-      const browseLinks =
-        "<span class='links'>"
-        + "<a href='" + prefixFolder + "'>by-prefix/</a>"
-        + "<a href='" + prefixFolder + "meta.json'>meta</a>"
-        + (it.fileByPrefix ? ("<a href='./" + it.fileByPrefix + "'>ttl</a>") : "")
-        + " · "
-        + "<a href='" + uriFolder + "'>by-uri/</a>"
-        + "<a href='" + uriFolder + "meta.json'>meta</a>"
-        + (it.fileByUri ? ("<a href='./" + it.fileByUri + "'>ttl</a>") : "")
-        + (nsIndex ? (" · <a href='" + nsIndex + "'>namespace/</a>") : "")
-        + (nsIndex ? ("<a href='" + nsIndex + "index.json'>ns json</a>") : "")
-        + "</span>";
+        const browseLinks =
+            "<span class='links'>"
+            + "<a href='" + prefixFolder + "'>by-prefix/</a>"
+            + "<a href='" + prefixFolder + "meta.json'>meta</a>"
+            + "<a href='" + prefixFolder + "ontology.ttl'>ttl</a>"
+            + " </span><br><span class='links'> "
+            + "<a href='" + uriFolder + "'>by-uri/</a>"
+            + "<a href='" + uriFolder + "meta.json'>meta</a>"
+            + "<a href='" + uriFolder + "ontology.ttl'>ttl</a>"
+            + "</span>";
 
       const statusTxt = it.skipped ? "cached" : (it.ok ? "ok" : "failed");
       const statusClass = it.ok ? "" : "bad";
